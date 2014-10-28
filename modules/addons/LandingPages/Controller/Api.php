@@ -40,21 +40,21 @@ class Api extends \Cockpit\Controller {
 
 	public function save() {
 
-		$collection = $this->param("collection", null);
+		$landingpage = $this->param("landingpage", null);
 
-		if ($collection) {
+		if ($landingpage) {
 
-			$collection["modified"] = time();
-			$collection["_uid"] = @$this->user["_id"];
+			$landingpage["modified"] = time();
+			$landingpage["_uid"] = @$this->user["_id"];
 
-			if (!isset($collection["_id"])) {
-				$collection["created"] = $collection["modified"];
+			if (!isset($landingpage["_id"])) {
+				$landingpage["created"] = $landingpage["modified"];
 			}
 
-			$this->app->db->save("common/landingpages", $collection);
+			$this->app->db->save("common/landingpages", $landingpage);
 		}
 
-		return $collection ? json_encode($collection) : '{}';
+		return $landingpage ? json_encode($landingpage) : '{}';
 	}
 
 	public function update() {
@@ -71,38 +71,38 @@ class Api extends \Cockpit\Controller {
 
 	public function remove() {
 
-		$collection = $this->param("collection", null);
+		$landingpage = $this->param("landingpage", null);
 
-		if ($collection) {
-			$col = "collection" . $collection["_id"];
+		if ($landingpage) {
+			$col = "landingpage" . $landingpage["_id"];
 
 			$this->app->db->dropLandingPage("landingpages/{$col}");
-			$this->app->db->remove("common/landingpages", ["_id" => $collection["_id"]]);
+			$this->app->db->remove("common/landingpages", ["_id" => $landingpage["_id"]]);
 		}
 
-		return $collection ? '{"success":true}' : '{"success":false}';
+		return $landingpage ? '{"success":true}' : '{"success":false}';
 	}
 
 	public function duplicate() {
 
-		$collectionId = $this->param("collectionId", null);
+		$landingpageId = $this->param("landingpageId", null);
 
-		if ($collectionId) {
+		if ($landingpageId) {
 
-			$collection = $this->app->db->findOneById("common/landingpages", $collectionId);
+			$landingpage = $this->app->db->findOneById("common/landingpages", $landingpageId);
 
-			if ($collection) {
+			if ($landingpage) {
 
-				unset($collection['_id']);
-				$collection["modified"] = time();
-				$collection["_uid"] = @$this->user["_id"];
-				$collection["created"] = $collection["modified"];
+				unset($landingpage['_id']);
+				$landingpage["modified"] = time();
+				$landingpage["_uid"] = @$this->user["_id"];
+				$landingpage["created"] = $landingpage["modified"];
 
-				$collection["name"] .= ' (copy)';
+				$landingpage["name"] .= ' (copy)';
 
-				$this->app->db->save("common/landingpages", $collection);
+				$this->app->db->save("common/landingpages", $landingpage);
 
-				return json_encode($collection);
+				return json_encode($landingpage);
 			}
 		}
 
@@ -111,17 +111,17 @@ class Api extends \Cockpit\Controller {
 
 	public function entries() {
 
-		$collection = $this->param("collection", null);
+		$landingpage = $this->param("landingpage", null);
 		$entries = [];
 
-		if ($collection) {
+		if ($landingpage) {
 
-			$col = "collection" . $collection["_id"];
+			$col = "landingpage" . $landingpage["_id"];
 			$options = [];
 
-			if ($collection["sortfield"] && $collection["sortorder"]) {
+			if ($landingpage["sortfield"] && $landingpage["sortorder"]) {
 				$options["sort"] = [];
-				$options["sort"][$collection["sortfield"]] = (int) $collection["sortorder"];
+				$options["sort"][$landingpage["sortfield"]] = (int) $landingpage["sortorder"];
 			}
 
 			if ($filter = $this->param("filter", null)) {$options["filter"] = is_string($filter) ? json_decode($filter, true) : $filter;
@@ -144,47 +144,47 @@ class Api extends \Cockpit\Controller {
 
 	public function removeentry() {
 
-		$collection = $this->param("collection", null);
+		$landingpage = $this->param("landingpage", null);
 		$entryId = $this->param("entryId", null);
 
-		if ($collection && $entryId) {
+		if ($landingpage && $entryId) {
 
-			$colid = $collection["_id"];
-			$col = "collection" . $collection["_id"];
+			$colid = $landingpage["_id"];
+			$col = "landingpage" . $landingpage["_id"];
 
 			$this->app->db->remove("landingpages/{$col}", ["_id" => $entryId]);
 
 			$this->app->helper("versions")->remove("coentry:{$colid}-{$entryId}");
 		}
 
-		return ($collection && $entryId) ? '{"success":true}' : '{"success":false}';
+		return ($landingpage && $entryId) ? '{"success":true}' : '{"success":false}';
 	}
 
 	public function emptytable() {
 
-		$collection = $this->param("collection", null);
+		$landingpage = $this->param("landingpage", null);
 
-		if ($collection) {
+		if ($landingpage) {
 
-			$collection = "collection" . $collection["_id"];
+			$landingpage = "landingpage" . $landingpage["_id"];
 
-			$this->app->db->remove("landingpages/{$collection}", []);
+			$this->app->db->remove("landingpages/{$landingpage}", []);
 		}
 
-		return $collection ? '{"success":true}' : '{"success":false}';
+		return $landingpage ? '{"success":true}' : '{"success":false}';
 	}
 
 	public function saveentry() {
 
-		$collection = $this->param("collection", null);
+		$landingpage = $this->param("landingpage", null);
 		$entry = $this->param("entry", null);
 
-		if ($collection && $entry) {
+		if ($landingpage && $entry) {
 
 			$entry["modified"] = time();
 			$entry["_uid"] = @$this->user["_id"];
 
-			$col = "collection" . $collection["_id"];
+			$col = "collection" . $landingpage["_id"];
 
 			if (!isset($entry["_id"])) {
 				$entry["created"] = $entry["modified"];
@@ -192,7 +192,7 @@ class Api extends \Cockpit\Controller {
 
 				if ($this->param("createversion", null)) {
 					$id = $entry["_id"];
-					$colid = $collection["_id"];
+					$colid = $landingpage["_id"];
 
 					$this->app->helper("versions")->add("coentry:{$colid}-{$id}", $entry);
 				}
@@ -259,18 +259,18 @@ class Api extends \Cockpit\Controller {
 		return false;
 	}
 
-	public function export($collectionId) {
+	public function export($landingpageId) {
 
 		if (!$this->app->module("auth")->hasaccess("landingpages", 'manage.landingpages')) {
 			return false;
 		}
 
-		$collection = $this->app->db->findOneById("common/landingpages", $collectionId);
+		$landingpage = $this->app->db->findOneById("common/landingpages", $landingpageId);
 
-		if (!$collection) {return false;
+		if (!$landingpage) {return false;
 		}
 
-		$col = "collection" . $collection["_id"];
+		$col = "collection" . $landingpage["_id"];
 		$entries = $this->app->db->find("landingpages/{$col}");
 
 		return json_encode($entries, JSON_PRETTY_PRINT);
