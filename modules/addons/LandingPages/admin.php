@@ -1,21 +1,21 @@
 <?php
 
 // ACL
-$this("acl")->addResource('Landingpages', ['manage.landingpages', 'manage.entries']);
+$this("acl")->addResource('LandingPages', ['manage.landingpages', 'manage.entries']);
 
 $app->on('admin.init', function () {
 
-	if (!$this->module('auth')->hasaccess('Landingpages', ['manage.landingpages', 'manage.entries'])) {return;
+	if (!$this->module('auth')->hasaccess('LandingPages', ['manage.landingpages', 'manage.entries'])) {return;
 	}
 
 	// bind controllers
-	$this->bindClass('Landingpages\\Controller\\Landingpages', 'landingpages');
-	$this->bindClass('Landingpages\\Controller\\Api', 'api/landingpages');
+	$this->bindClass('LandingPages\\Controller\\LandingPages', 'landingpages');
+	$this->bindClass('LandingPages\\Controller\\Api', 'api/landingpages');
 
 	$this('admin')->menu('top', [
 		'url' => $this->routeUrl('/landingpages'),
 		'label' => '<i class="uk-icon-list"></i>',
-		'title' => $this('i18n')->get('Landingpages'),
+		'title' => $this('i18n')->get('LandingPages'),
 		'active' => (strpos($this['route'], '/landingpages') === 0)
 	], 5);
 
@@ -36,10 +36,10 @@ $app->on('admin.init', function () {
 
 $app->on('admin.dashboard.aside', function () {
 
-	if (!$this->module('auth')->hasaccess('Landingpages', ['manage.landingpages', 'manage.entries'])) {return;
+	if (!$this->module('auth')->hasaccess('LandingPages', ['manage.landingpages', 'manage.entries'])) {return;
 	}
 
-	$title = $this('i18n')->get('Landingpages');
+	$title = $this('i18n')->get('LandingPages');
 	$badge = $this->db->getCollection('common/landingpages')->count();
 	$landingpages = $this->db->find('common/landingpages', ['limit' => 3, 'sort' => ['created' => -1]])->toArray();
 
