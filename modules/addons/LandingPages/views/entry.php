@@ -49,7 +49,7 @@
 
     <nav class="uk-navbar uk-margin-large-bottom">
         <span class="uk-navbar-brand">
-          <a href="@route("/landingpages")">@lang('landingpages')</a> /
+          <a href="@route("/landingpages")">@lang('LandingPages')</a> /
           <a href="@route("/landingpages/entries")/@@ collection._id @@">@@ collection.name @@</a> /
           @lang('Entry')
         </span>
@@ -70,7 +70,7 @@
         </div>
     </nav>
 
-    <form class="uk-form" data-ng-submit="save()" data-ng-show="collection">
+    <form class="uk-form" data-ng-submit="save()" data-ng-show="landingpage">
 
         <div class="uk-grid" data-uk-grid-margin>
 

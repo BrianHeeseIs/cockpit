@@ -34,9 +34,9 @@
 <div data-ng-controller="entries" ng-cloak>
 
     <nav class="uk-navbar uk-margin-bottom">
-        <span class="uk-navbar-brand"><a href="@route("/landingpages")">@lang('landingpages')</a> / {{ $collection['name'] }}</span>
+        <span class="uk-navbar-brand"><a href="@route("/landingpages")">@lang('LandingPages')</a> / {{ $collection['name'] }}</span>
         <ul class="uk-navbar-nav">
-            @hasaccess?("landingpages", 'manage.landingpages')
+            @hasaccess?("LandingPages", 'manage.landingpages')
             <li><a href="@route('/landingPages/landingpage/'.$collection["_id"])" title="@lang('Edit collection')" data-uk-tooltip="{pos:'bottom'}"><i class="uk-icon-pencil"></i></a></li>
             <li><a class="uk-text-danger" ng-click="emptytable()" title="@lang('Empty collection')" data-uk-tooltip="{pos:'bottom'}"><i class="uk-icon-trash-o"></i></a></li>
             @end
@@ -56,7 +56,7 @@
         @endif
 
         <div class="uk-navbar-flip">
-            @hasaccess?("landingpages", 'manage.landingpages')
+            @hasaccess?("LandingPages", 'manage.landingpages')
             <ul class="uk-navbar-nav">
                 <li>
                     <a href="@route('/api/landingpages/export/'.$collection['_id'])" download="{{ $collection['name'] }}.json" title="@lang('Export data')" data-uk-tooltip="{pos:'bottom'}">

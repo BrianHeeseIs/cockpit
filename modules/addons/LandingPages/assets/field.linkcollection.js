@@ -12,9 +12,9 @@
     }]);
 
 
-    angular.module('cockpit.fields').directive("linkLandingPage", ['$timeout', '$http', function($timeout, $http) {
+    angular.module('cockpit.fields').directive("linkCollection", ['$timeout', '$http', function($timeout, $http) {
 
-        var landingpages = false, cache = {}, cacheItems = {}, loaded, Field, Picker;
+        var collections = false, cache = {}, cacheItems = {}, loaded, Field, Picker;
 
         Field = function($element, options, model, scope) {
 
@@ -178,23 +178,23 @@
 
                 index = isNaN(index) ? -1 : Number(index);
 
-                Picker.show($this.collection, function(idx) {
+                Picker.show($this.landingpage, function(idx) {
 
                     if ($this.options.multiple) {
 
                         if (index > -1 && $this.value && $this.value[index]  ) {
-                            $this.value[index] = cache[$this.collection._id][idx]._id;
+                            $this.value[index] = cache[$this.landingpage._id][idx]._id;
                         } else {
 
                             if (!$this.value) {
                                 $this.value = [];
                             }
 
-                            $this.value.push(cache[$this.collection._id][idx]._id);
+                            $this.value.push(cache[$this.landingpage._id][idx]._id);
                         }
 
                     } else {
-                        $this.value = cache[$this.collection._id][idx]._id;
+                        $this.value = cache[$this.landingpage._id][idx]._id;
                     }
 
                     $this.model.$setViewValue($this.value);
@@ -231,7 +231,7 @@
                 Picker.handler($(this).data('index'));
             });
 
-            function renderItems(collection, items) {
+            function renderItems(landingpage, items) {
 
                 var table = $('<table class="uk-table uk-table-striped"><tbody></tbody></table>'),
                     rows  = [],
@@ -261,23 +261,23 @@
 
             return {
 
-                show: function(collection, handler) {
+                show: function(landingpage, handler) {
 
-                    modal.find('.js-collection-name').html(collection.name);
+                    modal.find('.js-collection-name').html(landingpage.name);
                     container.html('<div class="uk-text-center uk-text-large uk-margin"><i class="uk-icon-spinner uk-icon-spin"></i></div>');
 
-                    if (!itemsloaded[collection._id]) {
+                    if (!itemsloaded[landingpage._id]) {
 
-                        itemsloaded[collection._id] = new Promise(function(resolve){
+                        itemsloaded[landingpage._id] = new Promise(function(resolve){
 
-                            if (!cache[collection._id]) {
+                            if (!cache[landingpage._id]) {
 
                                 $http.post(App.route("/api/landingpages/entries"), {
-                                    "collection": angular.copy(collection)
+                                    "landingpage": angular.copy(landingpage)
                                 }, {responseType:"json"}).success(function(data){
 
 
-                                    cache[collection._id] = data;
+                                    cache[landingpage._id] = data;
                                     resolve();
                                 }).error(App.module.callbacks.error.http);
 
@@ -288,13 +288,13 @@
                         });
                     }
 
-                    itemsloaded[collection._id].then(function() {
+                    itemsloaded[landingpage._id].then(function() {
 
-                        if (!cache[collection._id].length) {
+                        if (!cache[landingpage._id].length) {
                             container.html('<div class="uk-text-center uk-text-large uk-margin">'+App.i18n.get('No items.')+'</div>');
                         } else {
                             Picker.handler = handler;
-                            renderItems(landingpages[collection._id], cache[collection._id]);
+                            renderItems(landingpages[landingpage._id], cache[landingpage._id]);
                         }
                     });
 
@@ -311,8 +311,8 @@
 
             landingpages = {};
 
-            data.forEach(function(collection){
-                landingpages[collection._id] = collection;
+            data.forEach(function(landingpage){
+                landingpages[landingpage._id] = landingpage;
             });
         });
 
@@ -325,18 +325,18 @@
                 return function link(scope, elm, attrs, ngModel) {
 
                     var $element     = $(elm).html('<i class="uk-icon-spinner uk-icon-spin"></i>'),
-                        collectionId = attrs.linkLandingPage;
+                        landingpageId = attrs.linkLandingPage;
 
                     loaded.then(function() {
 
-                        if (landingpages[collectionId]) {
+                        if (landingpages[landingpageId]) {
 
 
                             $timeout(function(){
 
                                 var options = {
                                     multiple   : attrs.multiple==='true',
-                                    collection : landingpages[collectionId],
+                                    landingpage : landingpages[landingpageId],
                                     model      : ngModel
                                 },
 
@@ -350,7 +350,7 @@
                             });
 
                         } else {
-                            $element.html('<div class="uk-alert uk-alert-danger">'+App.i18n.get('Linked collection doesn\'t exist.')+'</div>');
+                            $element.html('<div class="uk-alert uk-alert-danger">'+App.i18n.get('Linked landingpage doesn\'t exist.')+'</div>');
                         }
                     });
                 };

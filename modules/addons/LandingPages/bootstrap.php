@@ -25,7 +25,7 @@ $this->module("landingpages")->extend([
 
 		if ($collection) {
 			$col = 'collection' . $collection["_id"];
-			$collection = $app->db->getLandingPage("landingpages/{$col}");
+			$collection = $app->db->getCollection("landingpages/{$col}");
 		}
 
 		return $collection ? $collection : null;
@@ -42,7 +42,7 @@ $this->module("landingpages")->extend([
 		if (!isset($landingpages[$colid])) {
 
 			$collection = "collection{$colid}";
-			$landingpages[$colid] = $app->db->getLandingPage("landingpages/{$collection}");
+			$landingpages[$colid] = $app->db->getCollection("landingpages/{$collection}");
 
 		}
 
@@ -67,7 +67,7 @@ $this->module("landingpages")->extend([
 
 		if ($collection) {
 			$collection = "collection" . $collection["_id"];
-			return $app->db->getLandingPage("landingpages/{$collection}");
+			return $app->db->getCollection("landingpages/{$collection}");
 		}
 
 		return null;

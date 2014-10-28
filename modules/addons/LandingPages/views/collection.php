@@ -7,28 +7,28 @@
 
 @end('header')
 
-<div data-ng-controller="collection" data-id="{{ $id }}" ng-cloak>
+<div data-ng-controller="landingpage" data-id="{{ $id }}" ng-cloak>
 
     <h1>
-        <a href="@route("/landingpages")">@lang('landingpages')</a> /
-        <span class="uk-text-muted" ng-show="!collection.name">@lang('LandingPage')</span>
-        <span ng-show="collection.name">@@ collection.name @@</span>
+        <a href="@route("/landingpages")">@lang('LandingPages')</a> /
+        <span class="uk-text-muted" ng-show="!landingpage.name">@lang('LandingPage')</span>
+        <span ng-show="landingpage.name">@@ landingpage.name @@</span>
     </h1>
 
-    <form class="uk-form" data-ng-submit="save()" data-ng-show="collection">
+    <form class="uk-form" data-ng-submit="save()" data-ng-show="landingpage">
 
         <div class="uk-grid">
 
             <div class="uk-width-3-4">
 
                     <div class="uk-form-row">
-                        <input class="uk-width-1-1 uk-form-large" type="text" placeholder="@lang('Name')" data-ng-model="collection.name" required>
+                        <input class="uk-width-1-1 uk-form-large" type="text" placeholder="@lang('Name')" data-ng-model="landingpage.name" required>
                         <div class="uk-margin-top">
-                            <input class="uk-width-1-1 uk-form-blank uk-text-muted" type="text" data-ng-model="collection.slug" app-slug="collection.name" placeholder="@lang('Slug...')" title="slug" data-uk-tooltip="{pos:'left'}">
+                            <input class="uk-width-1-1 uk-form-blank uk-text-muted" type="text" data-ng-model="landingpage.slug" app-slug="landingpage.name" placeholder="@lang('Slug...')" title="slug" data-uk-tooltip="{pos:'left'}">
                         </div>
                     </div>
 
-                    <div class="uk-form-row uk-margin uk-text-center" data-ng-show="!collection.fields || !collection.fields.length">
+                    <div class="uk-form-row uk-margin uk-text-center" data-ng-show="!landingpage.fields || !landingpage.fields.length">
                             <div class="app-panel">
                                 <h2>@lang('Fields')</h2>
                                 <p>
@@ -38,13 +38,13 @@
                         </div>
                     </div>
 
-                    <div class="uk-form-row uk-margin" data-ng-show="collection.fields && collection.fields.length">
+                    <div class="uk-form-row uk-margin" data-ng-show="landingpage.fields && landingpage.fields.length">
                         <strong>@lang('Fields')</strong>
                     </div>
 
-                    <div class="uk-form-row" data-ng-show="collection.fields && collection.fields.length">
+                    <div class="uk-form-row" data-ng-show="landingpage.fields && landingpage.fields.length">
                         <ul class="uk-list">
-                            <li class="uk-margin-bottom uk-clearfix" data-ng-repeat="field in collection.fields">
+                            <li class="uk-margin-bottom uk-clearfix" data-ng-repeat="field in landingpage.fields">
 
                                 <div class="uk-panel app-panel">
 
@@ -154,17 +154,17 @@
                     <br>
                     <br>
 
-                    <div class="uk-form-row" data-ng-show="collection.fields && collection.fields.length">
+                    <div class="uk-form-row" data-ng-show="landingpage.fields && landingpage.fields.length">
                         <div class="uk-button-group">
                             <button type="submit" class="uk-button uk-button-primary uk-button-large">@lang('Save LandingPage')</button>
-                            <a href="@route('/landingpages/entries')/@@ collection._id @@" class="uk-button uk-button-large" data-ng-show="collection._id"><i class="uk-icon-list"></i> @lang('Goto entries')</a>
+                            <a href="@route('/landingpages/entries')/@@ landingpage._id @@" class="uk-button uk-button-large" data-ng-show="landingpage._id"><i class="uk-icon-list"></i> @lang('Goto entries')</a>
                         </div>
                         &nbsp;
                         <a href="@route('/landingpages')">@lang('Cancel')</a>
                     </div>
 
             </div>
-            <div class="uk-width-1-4" data-ng-show="collection.fields && collection.fields.length">
+            <div class="uk-width-1-4" data-ng-show="landingpage.fields && landingpage.fields.length">
 
                 <strong>@lang('Settings')</strong>
 
@@ -173,8 +173,8 @@
                     <div class="uk-form-controls uk-margin-small-top">
                         <div class="uk-form-select">
                             <i class="uk-icon-sitemap uk-margin-small-right"></i>
-                            <a>@@ collection.group || '- @lang("No group") -' @@</a>
-                            <select class="uk-width-1-1 uk-margin-small-top" data-ng-model="collection.group">
+                            <a>@@ landingpage.group || '- @lang("No group") -' @@</a>
+                            <select class="uk-width-1-1 uk-margin-small-top" data-ng-model="landingpage.group">
                                 <option ng-repeat="group in groups" value="@@ group @@">@@ group @@</option>
                                 <option value="">- @lang("No group") -</option>
                             </select>
@@ -187,7 +187,7 @@
                         @lang('Fields on entries list page'):
                     </p>
                     <ul id="fields-list" class="uk-nestable" data-uk-nestable="{maxDepth:1}">
-                        <li class="uk-nestable-list-item" data-ng-repeat="field in collection.fields">
+                        <li class="uk-nestable-list-item" data-ng-repeat="field in landingpage.fields">
                             <div class="uk-nestable-item uk-nestable-item-table">
                                 <div class="uk-nestable-handle"></div>
                                 <input type="checkbox" data-ng-checked="field.lst" data-ng-model="field.lst">
@@ -202,8 +202,8 @@
                         @lang('Order entries on list page'):
                     </p>
 
-                    <select class="uk-width-1-1 uk-margin-bottom" data-ng-model="collection.sortfield"  ng-options="f.name as f.name for f in sortfields"></select>
-                    <select class="uk-width-1-1" data-ng-model="collection.sortorder">
+                    <select class="uk-width-1-1 uk-margin-bottom" data-ng-model="landingpage.sortfield"  ng-options="f.name as f.name for f in sortfields"></select>
+                    <select class="uk-width-1-1" data-ng-model="landingpage.sortorder">
                         <option value="-1">@lang('descending')</option>
                         <option value="1">@lang('ascending')</option>
                     </select>
