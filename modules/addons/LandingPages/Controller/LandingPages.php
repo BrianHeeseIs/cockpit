@@ -1,6 +1,6 @@
 <?php
 
-namespace landingpages\Controller;
+namespace LandingPages\Controller;
 
 class LandingPages extends \Cockpit\Controller {
 

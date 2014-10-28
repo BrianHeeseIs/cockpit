@@ -40,7 +40,7 @@ class Api extends \Cockpit\Controller {
 
 	public function save() {
 
-		$landingpage = $this->param("landingpage", null);
+		$landingpage = $this->param("collection", null);
 
 		if ($landingpage) {
 
@@ -71,10 +71,10 @@ class Api extends \Cockpit\Controller {
 
 	public function remove() {
 
-		$landingpage = $this->param("landingpage", null);
+		$landingpage = $this->param("collection", null);
 
 		if ($landingpage) {
-			$col = "landingpage" . $landingpage["_id"];
+			$col = "collection" . $landingpage["_id"];
 
 			$this->app->db->dropLandingPage("landingpages/{$col}");
 			$this->app->db->remove("common/landingpages", ["_id" => $landingpage["_id"]]);
@@ -85,7 +85,7 @@ class Api extends \Cockpit\Controller {
 
 	public function duplicate() {
 
-		$landingpageId = $this->param("landingpageId", null);
+		$landingpageId = $this->param("collectionId", null);
 
 		if ($landingpageId) {
 
@@ -144,13 +144,13 @@ class Api extends \Cockpit\Controller {
 
 	public function removeentry() {
 
-		$landingpage = $this->param("landingpage", null);
+		$landingpage = $this->param("collection", null);
 		$entryId = $this->param("entryId", null);
 
 		if ($landingpage && $entryId) {
 
 			$colid = $landingpage["_id"];
-			$col = "landingpage" . $landingpage["_id"];
+			$col = "collection" . $landingpage["_id"];
 
 			$this->app->db->remove("landingpages/{$col}", ["_id" => $entryId]);
 
@@ -162,11 +162,11 @@ class Api extends \Cockpit\Controller {
 
 	public function emptytable() {
 
-		$landingpage = $this->param("landingpage", null);
+		$landingpage = $this->param("collection", null);
 
 		if ($landingpage) {
 
-			$landingpage = "landingpage" . $landingpage["_id"];
+			$landingpage = "collection" . $landingpage["_id"];
 
 			$this->app->db->remove("landingpages/{$landingpage}", []);
 		}
@@ -176,7 +176,7 @@ class Api extends \Cockpit\Controller {
 
 	public function saveentry() {
 
-		$landingpage = $this->param("landingpage", null);
+		$landingpage = $this->param("collection", null);
 		$entry = $this->param("entry", null);
 
 		if ($landingpage && $entry) {
