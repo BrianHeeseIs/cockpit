@@ -3,7 +3,7 @@
     angular.module('cockpit.fields').run(['Contentfields', function(Contentfields) {
 
         Contentfields.register('link-collection', {
-            label: 'Collection link',
+            label: 'LandingPage link',
             template: function(model, options) {
                 return '<div link-collection="'+options.collection+'" ng-model="'+model+'" data-multiple="'+(options.multiple ? 'true':'false')+'">Linking '+options.collection+'</div>';
             }
@@ -12,7 +12,7 @@
     }]);
 
 
-    angular.module('cockpit.fields').directive("linkCollection", ['$timeout', '$http', function($timeout, $http) {
+    angular.module('cockpit.fields').directive("linkLandingPage", ['$timeout', '$http', function($timeout, $http) {
 
         var landingpages = false, cache = {}, cacheItems = {}, loaded, Field, Picker;
 
@@ -325,7 +325,7 @@
                 return function link(scope, elm, attrs, ngModel) {
 
                     var $element     = $(elm).html('<i class="uk-icon-spinner uk-icon-spin"></i>'),
-                        collectionId = attrs.linkCollection;
+                        collectionId = attrs.linkLandingPage;
 
                     loaded.then(function() {
 

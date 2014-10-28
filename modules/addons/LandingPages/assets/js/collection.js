@@ -75,7 +75,7 @@
 
                 if (data && Object.keys(data).length) {
                     $scope.collection._id = data._id;
-                    App.notify(App.i18n.get("Collection saved!"), "success");
+                    App.notify(App.i18n.get("LandingPage saved!"), "success");
                 }
 
             }).error(App.module.callbacks.error.http);

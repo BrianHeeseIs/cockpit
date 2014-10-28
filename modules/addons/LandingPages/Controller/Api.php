@@ -76,7 +76,7 @@ class Api extends \Cockpit\Controller {
 		if ($collection) {
 			$col = "collection" . $collection["_id"];
 
-			$this->app->db->dropCollection("landingpages/{$col}");
+			$this->app->db->dropLandingPage("landingpages/{$col}");
 			$this->app->db->remove("common/landingpages", ["_id" => $collection["_id"]]);
 		}
 

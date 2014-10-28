@@ -40,7 +40,7 @@ $app->on('admin.dashboard.aside', function () {
 	}
 
 	$title = $this('i18n')->get('landingpages');
-	$badge = $this->db->getCollection('common/landingpages')->count();
+	$badge = $this->db->getLandingPage('common/landingpages')->count();
 	$landingpages = $this->db->find('common/landingpages', ['limit' => 3, 'sort' => ['created' => -1]])->toArray();
 
 	$this->renderView('landingpages:views/dashboard.php with cockpit:views/layouts/dashboard.widget.php', compact('title', 'badge', 'landingpages'));

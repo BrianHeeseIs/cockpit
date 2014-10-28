@@ -45,7 +45,7 @@
         </div>
         @hasaccess?("LandingPages", 'manage.landingpages')
         <ul class="uk-navbar-nav">
-            <li><a href="@route('/landingpages/collection')" title="@lang('Add collection')" data-uk-tooltip="{pos:'right'}"><i class="uk-icon-plus-circle"></i></a></li>
+            <li><a href="@route('/landingPages/landingpage')" title="@lang('Add collection')" data-uk-tooltip="{pos:'right'}"><i class="uk-icon-plus-circle"></i></a></li>
         </ul>
         @end
         <div class="uk-navbar-flip" data-ng-if="landingpages && landingpages.length">
@@ -119,7 +119,7 @@
                                         <li><a href="@route('/landingpages/entry')/@@ collection._id @@"><i class="uk-icon-plus-circle"></i> @lang('Create new entry')</a></li>
                                         @hasaccess?("LandingPages", 'manage.landingpages')
                                         <li class="uk-nav-divider"></li>
-                                        <li><a href="@route('/landingpages/collection')/@@ collection._id @@"><i class="uk-icon-pencil"></i> @lang('Edit collection')</a></li>
+                                        <li><a href="@route('/landingPages/landingpage')/@@ collection._id @@"><i class="uk-icon-pencil"></i> @lang('Edit collection')</a></li>
                                         <li><a ng-click="duplicate(collection._id)"><i class="uk-icon-copy"></i> @lang('Duplicate collection')</a></li>
                                         <li class="uk-nav-divider"></li>
                                         <li class="uk-danger"><a data-ng-click="remove($index, collection)" href="#"><i class="uk-icon-minus-circle"></i> @lang('Delete collection')</a></li>
@@ -137,7 +137,7 @@
                     <thead>
                         <tr>
                             <th width="10"><input class="js-select-all" type="checkbox"></th>
-                            <th width="60%">@lang('Collection')</th>
+                            <th width="60%">@lang('LandingPage')</th>
                             <th width="10%">@lang('Entries')</th>
                             <th></th>
                         </tr>
@@ -159,7 +159,7 @@
                                             <li><a href="@route('/landingpages/entry')/@@ collection._id @@"><i class="uk-icon-plus-circle"></i> @lang('Create new entry')</a></li>
                                             @hasaccess?("LandingPages", 'manage.landingpages')
                                             <li class="uk-nav-divider"></li>
-                                            <li><a href="@route('/landingpages/collection')/@@ collection._id @@"><i class="uk-icon-pencil"></i> @lang('Edit collection')</a></li>
+                                            <li><a href="@route('/landingPages/landingpage')/@@ collection._id @@"><i class="uk-icon-pencil"></i> @lang('Edit collection')</a></li>
                                             <li><a ng-click="duplicate(collection._id)"><i class="uk-icon-copy"></i> @lang('Duplicate collection')</a></li>
                                             <li class="uk-nav-divider"></li>
                                             <li class="uk-danger"><a data-ng-click="remove($index, collection)" href="#"><i class="uk-icon-minus-circle"></i> @lang('Delete collection')</a></li>
@@ -187,7 +187,7 @@
         </p>
 
         @hasaccess?("LandingPages", 'manage.landingpages')
-        <a href="@route('/landingpages/collection')" class="uk-button uk-button-success uk-button-large">@lang('Create a collection')</a>
+        <a href="@route('/landingPages/landingpage')" class="uk-button uk-button-success uk-button-large">@lang('Create a collection')</a>
         @end
     </div>
 

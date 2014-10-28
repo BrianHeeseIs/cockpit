@@ -28,7 +28,7 @@
 
                     $timeout(function(){
                         $scope.landingpages.splice(index, 1);
-                        App.notify(App.i18n.get("Collection removed"), "success");
+                        App.notify(App.i18n.get("LandingPage removed"), "success");
                     }, 0);
                 }).error(App.module.callbacks.error.http);
             });
@@ -40,7 +40,7 @@
 
                 $timeout(function(){
                     $scope.landingpages.push(collection);
-                    App.notify(App.i18n.get("Collection duplicated"), "success");
+                    App.notify(App.i18n.get("LandingPage duplicated"), "success");
                 }, 0);
             }).error(App.module.callbacks.error.http);
         };

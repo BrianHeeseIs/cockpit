@@ -11,7 +11,7 @@
 
     <h1>
         <a href="@route("/landingpages")">@lang('landingpages')</a> /
-        <span class="uk-text-muted" ng-show="!collection.name">@lang('Collection')</span>
+        <span class="uk-text-muted" ng-show="!collection.name">@lang('LandingPage')</span>
         <span ng-show="collection.name">@@ collection.name @@</span>
     </h1>
 
@@ -131,7 +131,7 @@
                                                     </div>
 
                                                     <div class="uk-form-row" data-ng-if="field.type=='link-collection'">
-                                                        <label class="uk-form-label">@lang('Collection')</label>
+                                                        <label class="uk-form-label">@lang('LandingPage')</label>
                                                         <div class="uk-form-controls">
                                                             <select ng-options="c._id as c.name for c in landingpages" data-ng-model="field.collection" title="@lang('Related collection')" data-uk-tooltip required></select>
                                                             <input type="checkbox" data-ng-model="field.multiple"> @lang('multiple')
@@ -156,7 +156,7 @@
 
                     <div class="uk-form-row" data-ng-show="collection.fields && collection.fields.length">
                         <div class="uk-button-group">
-                            <button type="submit" class="uk-button uk-button-primary uk-button-large">@lang('Save Collection')</button>
+                            <button type="submit" class="uk-button uk-button-primary uk-button-large">@lang('Save LandingPage')</button>
                             <a href="@route('/landingpages/entries')/@@ collection._id @@" class="uk-button uk-button-large" data-ng-show="collection._id"><i class="uk-icon-list"></i> @lang('Goto entries')</a>
                         </div>
                         &nbsp;

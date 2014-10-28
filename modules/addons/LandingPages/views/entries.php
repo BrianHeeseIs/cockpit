@@ -37,7 +37,7 @@
         <span class="uk-navbar-brand"><a href="@route("/landingpages")">@lang('landingpages')</a> / {{ $collection['name'] }}</span>
         <ul class="uk-navbar-nav">
             @hasaccess?("landingpages", 'manage.landingpages')
-            <li><a href="@route('/landingpages/collection/'.$collection["_id"])" title="@lang('Edit collection')" data-uk-tooltip="{pos:'bottom'}"><i class="uk-icon-pencil"></i></a></li>
+            <li><a href="@route('/landingPages/landingpage/'.$collection["_id"])" title="@lang('Edit collection')" data-uk-tooltip="{pos:'bottom'}"><i class="uk-icon-pencil"></i></a></li>
             <li><a class="uk-text-danger" ng-click="emptytable()" title="@lang('Empty collection')" data-uk-tooltip="{pos:'bottom'}"><i class="uk-icon-trash-o"></i></a></li>
             @end
             <li><a href="@route('/landingpages/entry/'.$collection["_id"])" title="@lang('Add entry')" data-uk-tooltip="{pos:'bottom'}"><i class="uk-icon-plus-circle"></i></a></li>
